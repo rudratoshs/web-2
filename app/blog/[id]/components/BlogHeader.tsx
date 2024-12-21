@@ -1,13 +1,15 @@
-import Image from "next/image"
-import { Calendar, Clock } from "lucide-react"
-import type { BlogPost } from "@/lib/blog-data"
-import { BlogSidebar } from "./BlogSidebar" // Import the sidebar component
+import Image from "next/image";
+import { Calendar, Clock } from "lucide-react";
+import type { BlogPost } from "@/lib/blog-data";
+import { BlogSidebar } from "./BlogSidebar"; // Import the sidebar component
 
 interface BlogHeaderProps {
-  post: BlogPost
+  post: BlogPost;
 }
 
 export function BlogHeader({ post }: BlogHeaderProps) {
+  const category = post.category || "Uncategorized"; // Fallback for null category
+
   return (
     <div className="relative py-10 lg:py-16">
       {/* Grid layout for heading and sidebar */}
@@ -17,7 +19,7 @@ export function BlogHeader({ post }: BlogHeaderProps) {
           <div className="max-w-3xl">
             <div className="mb-6">
               <span className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-md text-xs font-medium bg-primary/10 text-primary">
-                {post.category}
+                {category}
               </span>
             </div>
 
@@ -37,18 +39,20 @@ export function BlogHeader({ post }: BlogHeaderProps) {
                 </div>
                 <div>
                   <p className="font-medium">{post.author.name}</p>
-                  <p className="text-sm text-muted-foreground">{post.author.role}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {post.author.role || "Author"}
+                  </p>
                 </div>
               </div>
 
               <div className="flex items-center gap-4 text-sm text-muted-foreground">
                 <span className="flex items-center gap-1">
                   <Calendar className="size-4" />
-                  {post.date}
+                  {post.date || "Unknown Date"}
                 </span>
                 <span className="flex items-center gap-1">
                   <Clock className="size-4" />
-                  {post.readTime}
+                  {post.readTime || "Read Time N/A"}
                 </span>
               </div>
             </div>
@@ -56,5 +60,5 @@ export function BlogHeader({ post }: BlogHeaderProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }
