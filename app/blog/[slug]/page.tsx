@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { BlogPost } from '../[id]/components/BlogPost'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/footer/Footer'
-
+import {BlogSidebar} from './components/BlogSidebar'
 export const revalidate = 60 // Revalidate every minute
 
 interface BlogPostPageProps {

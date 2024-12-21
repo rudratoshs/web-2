@@ -25,7 +25,6 @@ const item = {
 
 export async function BlogSidebar() {
   const posts = await getAllPosts()
-  console.log('rudra',posts)
   const recentPosts = posts.slice(0, 3)
 
   return (

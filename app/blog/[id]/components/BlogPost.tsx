@@ -1,5 +1,5 @@
 import { BlogContent } from "./BlogContent"
-import { BlogSidebar } from "./BlogSidebar"
+import { BlogSidebar } from "../../[slug]/components/BlogSidebar"
 import { BlogHeader } from "./BlogHeader"
 import type { BlogPost as BlogPostType } from "@/lib/blog-data"
 
