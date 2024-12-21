@@ -97,7 +97,7 @@ import {
       featured: {
         title: "New Release: AI Platform",
         description: "Harness the power of artificial intelligence for your business",
-        image: "/images/products/ai-platform.jpg",
+        image: "/projects/ai-platform.jpg",
         href: "/products/ai-platform"
       }
     },
@@ -154,7 +154,7 @@ import {
       featured: {
         title: "Cloud Migration Services",
         description: "Seamlessly move your infrastructure to the cloud",
-        image: "/images/solutions/cloud-migration.jpg",
+        image: "/projects/cloud-migration.jpg",
         href: "/solutions/cloud-migration"
       }
     },
@@ -211,7 +211,7 @@ import {
       featured: {
         title: "Healthcare Innovation",
         description: "Transforming healthcare with AI and IoT",
-        image: "/images/industries/healthcare-innovation.jpg",
+        image: "/projects/healthcare.jpg",
         href: "/industries/healthcare-case-study"
       }
     },
@@ -268,7 +268,7 @@ import {
       featured: {
         title: "The Future of AI",
         description: "Exploring the latest developments in artificial intelligence",
-        image: "/images/blog/ai-future.jpg",
+        image: "/projects/ai-future.jpg",
         href: "/blog/ai-future"
       }
     }
