@@ -12,10 +12,11 @@ export async function getPostBySlug(slug: string) {
 export async function getAllCategories() {
     return await client.fetch(allCategoriesQuery)
 }
-export function formatDate(date: string) {
+export function formatDate(date: string | null) {
+    if (!date) return 'Draft'
     return new Date(date).toLocaleDateString('en-US', {
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric'
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
     })
-}
+  }

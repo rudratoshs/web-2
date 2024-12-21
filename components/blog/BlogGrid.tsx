@@ -1,10 +1,24 @@
-'use client'; // Marks this as a Client Component
+'use client';
+
 import { motion } from 'framer-motion';
 import { BlogCard } from './BlogCard';
-import type { BlogPost } from '@/lib/blog-data';
+
+interface Post {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  coverImage: string;
+  publishedAt: string;
+  excerpt: string;
+  readingTime: number;
+  categories: Array<{
+    _id: string;
+    title: string;
+  }>;
+}
 
 interface BlogGridProps {
-  posts: BlogPost[];
+  posts: Post[];
 }
 
 export function BlogGrid({ posts }: BlogGridProps) {

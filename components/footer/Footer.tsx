@@ -53,7 +53,7 @@ export function Footer() {
               <a href="#" className="inline-block hover:text-foreground">Terms</a>
               <a href="#" className="inline-block hover:text-foreground">Privacy</a>
               <a href="#" className="inline-block hover:text-foreground">Status</a>
-              <p className="inline-block">&copy; 2024 TechCore. All rights reserved.</p>
+              <p className="inline-block">&copy; 2024 X Innovation Code Stack. All rights reserved.</p>
             </div>
           </div>
         </div>

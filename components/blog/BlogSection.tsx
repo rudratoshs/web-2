@@ -1,8 +1,15 @@
 import { motion } from 'framer-motion'
 import { BlogGrid } from './BlogGrid'
 import { blogPosts } from '@/lib/blog-data'
+import { getAllPosts } from "@/lib/sanity/utils";
 
-export function BlogSection() {
+
+interface BlogPostPageProps {
+    params: { slug: string };
+}
+
+export default async function BlogSection({ params }: BlogPostPageProps) {
+    const posts = await getAllPosts();
     return (
         <section className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
             <motion.div
@@ -19,7 +26,7 @@ export function BlogSection() {
                 </p>
             </motion.div>
 
-            <BlogGrid posts={blogPosts} />
+            <BlogGrid posts={posts} />
         </section>
     )
 }

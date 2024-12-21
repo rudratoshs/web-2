@@ -3,15 +3,19 @@ export const allPostsQuery = `*[_type == "post"] | order(publishedAt desc) {
     title,
     slug,
     excerpt,
-    "category": category->title,
+    "categories": categories[]->{ 
+      _id,
+      title,
+      slug
+    },
     "coverImage": mainImage.asset->url,
     publishedAt,
-    readingTime,
-    "author": author-> {
-      name,
-      role,
-      "avatar": image.asset->url,
-      bio
+    "readingTime": round(length(pt::text(body)) / 5 / 180), // Estimates reading time based on word count
+    "author": {
+      "name": author->name,
+      "role": author->role,
+      "avatar": author->image.asset->url,
+      "bio": author->bio
     }
   }`
   
@@ -21,17 +25,22 @@ export const allPostsQuery = `*[_type == "post"] | order(publishedAt desc) {
     slug,
     excerpt,
     body,
-    "category": category->title,
+    "categories": categories[]->{ 
+      _id,
+      title,
+      slug
+    },
     "coverImage": mainImage.asset->url,
     publishedAt,
-    readingTime,
-    "author": author-> {
-      name,
-      role,
-      "avatar": image.asset->url,
-      bio
+    "readingTime": round(length(pt::text(body)) / 5 / 180), // Estimates reading time based on word count
+    "author": {
+      "name": author->name,
+      "role": author->role,
+      "avatar": author->image.asset->url,
+      "bio": author->bio
     }
   }`
+  
 
   export const allCategoriesQuery = `*[_type == "category"] {
     _id,

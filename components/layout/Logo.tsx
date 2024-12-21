@@ -6,10 +6,10 @@ export function Logo() {
     <Link href="/" className="flex items-center space-x-2">
       <div className="relative w-8 h-8">
         <Image
-          src="/logo.svg"
+          src="/logo.png"
           alt="X Innovation Code Stack"
-          width={32}
-          height={32}
+          width={200}     // Specify the larger width
+            height={100}
           className="object-contain"
         />
       </div>

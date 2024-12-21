@@ -15,8 +15,8 @@ import { PortfolioSection } from "@/components/portfolio/PortfolioSection"
 import { TestimonialsSection } from "@/components/testimonials/TestimonialsSection"
 import { ContactSection } from "@/components/contact/ContactSection"
 import { Footer } from "@/components/footer/Footer"
-import { BlogSection } from "@/components/blog/BlogSection"
-
+import BlogSection from "@/components/blog/BlogSection"
+import { Logo } from "@/components/layout/Logo"
 export default function Home() {
   const projects = [
     {
@@ -54,21 +54,21 @@ export default function Home() {
       name: "Sarah Johnson",
       company: "TechInnovate Inc.",
       image: "/placeholder.svg?height=100&width=100",
-      quote: "TechCore's expertise in cloud solutions transformed our infrastructure. Their team's dedication and innovative approach exceeded our expectations.",
+      quote: "X Innovation Code Stack's expertise in cloud solutions transformed our infrastructure. Their team's dedication and innovative approach exceeded our expectations.",
       rating: 5
     },
     {
       name: "Michael Chen",
       company: "DataDrive Solutions",
       image: "/placeholder.svg?height=100&width=100",
-      quote: "The AI-powered analytics platform TechCore developed for us has revolutionized our decision-making process. Their technical prowess is truly impressive.",
+      quote: "The AI-powered analytics platform X Innovation Code Stack developed for us has revolutionized our decision-making process. Their technical prowess is truly impressive.",
       rating: 5
     },
     {
       name: "Emily Rodriguez",
       company: "GreenTech Innovations",
       image: "/placeholder.svg?height=100&width=100",
-      quote: "Working with TechCore on our IoT project was a game-changer. Their ability to navigate complex technical challenges while maintaining clear communication was outstanding.",
+      quote: "Working with X Innovation Code Stack on our IoT project was a game-changer. Their ability to navigate complex technical challenges while maintaining clear communication was outstanding.",
       rating: 5
     }
   ];
@@ -77,10 +77,7 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-b from-background to-background/95 max-w-screen-2xl mx-auto">
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-4 flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <Code2 className="h-6 w-6 text-primary" />
-            <span className="text-xl font-bold">TechCore</span>
-          </Link>
+            <Logo/>
           <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
             <Link href="/" className="text-foreground/60 transition-colors hover:text-foreground">
               Home
