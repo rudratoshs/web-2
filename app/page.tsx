@@ -15,6 +15,7 @@ import { PortfolioSection } from "@/components/portfolio/PortfolioSection"
 import { TestimonialsSection } from "@/components/testimonials/TestimonialsSection"
 import { ContactSection } from "@/components/contact/ContactSection"
 import { Footer } from "@/components/footer/Footer"
+import { Header } from "@/components/layout/Header"
 import BlogSection from "@/components/blog/BlogSection"
 import { Logo } from "@/components/layout/Logo"
 export default function Home() {
@@ -75,49 +76,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-background/95 max-w-screen-2xl mx-auto">
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container mx-auto px-4 flex h-16 items-center justify-between">
-            <Logo/>
-          <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
-            <Link href="/" className="text-foreground/60 transition-colors hover:text-foreground">
-              Home
-            </Link>
-            <Link href="#services" className="text-foreground/60 transition-colors hover:text-foreground">
-              Services
-            </Link>
-            <Link href="#projects" className="text-foreground/60 transition-colors hover:text-foreground">
-              Projects
-            </Link>
-            <Link href="#technologies" className="text-foreground/60 transition-colors hover:text-foreground">
-              Technologies
-            </Link>
-            <Link href="#contact" className="text-foreground/60 transition-colors hover:text-foreground">
-              Contact
-            </Link>
-            <Button>Get Started</Button>
-          </nav>
-          <Button className="md:hidden" variant="outline" size="icon">
-            <span className="sr-only">Toggle menu</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="h-4 w-4"
-            >
-              <line x1="3" x2="21" y1="6" y2="6" />
-              <line x1="3" x2="21" y1="12" y2="12" />
-              <line x1="3" x2="21" y1="18" y2="18" />
-            </svg>
-          </Button>
-        </div>
-      </header>
-
+      <Header />
       <main>
         <HeroSection />
 
@@ -126,7 +85,7 @@ export default function Home() {
         <PortfolioSection />
 
         <TestimonialsSection />
-    <BlogSection/>
+        <BlogSection />
         <ContactSection />
       </main>
       <Footer />
