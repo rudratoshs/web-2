@@ -54,11 +54,6 @@ export function BlogHeader({ post }: BlogHeaderProps) {
             </div>
           </div>
         </div>
-
-        {/* Sidebar */}
-        <div className="lg:col-span-4">
-          <BlogSidebar />
-        </div>
       </div>
     </div>
   )

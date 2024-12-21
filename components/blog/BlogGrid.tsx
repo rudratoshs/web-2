@@ -1,9 +1,10 @@
-import { motion } from 'framer-motion'
-import { BlogCard } from './BlogCard'
-import type { BlogPost } from '@/lib/blog-data'
+'use client'; // Marks this as a Client Component
+import { motion } from 'framer-motion';
+import { BlogCard } from './BlogCard';
+import type { BlogPost } from '@/lib/blog-data';
 
 interface BlogGridProps {
-  posts: BlogPost[]
+  posts: BlogPost[];
 }
 
 export function BlogGrid({ posts }: BlogGridProps) {
@@ -11,7 +12,7 @@ export function BlogGrid({ posts }: BlogGridProps) {
     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {posts.map((post, index) => (
         <motion.div
-          key={post.id}
+          key={post._id}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -21,5 +22,5 @@ export function BlogGrid({ posts }: BlogGridProps) {
         </motion.div>
       ))}
     </div>
-  )
+  );
 }

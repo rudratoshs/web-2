@@ -1,45 +1,53 @@
+'use client';
 import Image from "next/image"
-import type { BlogPost } from "@/lib/blog-data"
+import { PortableText } from '@portabletext/react'
+import { components } from '@/lib/sanity/portableText'
+import { motion } from 'framer-motion'
 
 interface BlogContentProps {
-  post: BlogPost
+  post: {
+    coverImage: string
+    title: string
+    excerpt: string
+    body: any // Sanity Portable Text
+  }
 }
 
 export function BlogContent({ post }: BlogContentProps) {
   return (
     <article className="prose prose-gray max-w-none">
-      <div className="relative aspect-[16/9] mb-8 rounded-xl overflow-hidden">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="relative aspect-[16/9] mb-8 rounded-xl overflow-hidden"
+      >
         <Image
           src={post.coverImage}
           alt={post.title}
           fill
           className="object-cover"
         />
-      </div>
+      </motion.div>
 
-      <p className="lead">{post.excerpt}</p>
+      <motion.p 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2 }}
+        className="lead text-xl text-muted-foreground mb-8"
+      >
+        {post.excerpt}
+      </motion.p>
 
-      {/* Sample content - you should replace this with actual blog content */}
-      <h2>Introduction</h2>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor 
-        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-      </p>
-
-      <h2>Key Points</h2>
-      <ul>
-        <li>First important point about the topic</li>
-        <li>Second key consideration to keep in mind</li>
-        <li>Third major aspect of the discussion</li>
-      </ul>
-
-      <h2>Conclusion</h2>
-      <p>
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-        eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt 
-        in culpa qui officia deserunt mollit anim id est laborum.
-      </p>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3 }}
+      >
+        <PortableText 
+          value={post.body}
+          components={components}
+        />
+      </motion.div>
     </article>
   )
 }
