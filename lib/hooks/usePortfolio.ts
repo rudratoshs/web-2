@@ -4,7 +4,6 @@ import type { Portfolio } from '../types/strapi';
 
 export function usePortfolios() {
   const { data, error, isLoading } = useSWR<Portfolio[]>('portfolios', getPortfolios);
-
   return {
     portfolios: data,
     isLoading,

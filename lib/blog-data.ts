@@ -92,25 +92,5 @@ export interface BlogPost {
     updatedAt: string;
     publishedAt: string;
   };
-  blocks: Array<
-    | {
-        __component: "shared.rich-text";
-        id: number;
-        body: string;
-      }
-    | {
-        __component: "shared.quote";
-        id: number;
-        title: string;
-        body: string;
-      }
-    | {
-        __component: "shared.media";
-        id: number;
-      }
-    | {
-        __component: "shared.slider";
-        id: number;
-      }
-  >;
+  blocks:any;
 }
