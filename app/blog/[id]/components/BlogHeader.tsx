@@ -1,6 +1,10 @@
+'use client';
+
 import Image from "next/image";
 import { Calendar, Clock } from "lucide-react";
+import { useEffect, useState } from "react";
 import { STRAPI_URL } from "@/lib/config/strapi";
+import { format } from "date-fns";
 
 interface BlogHeaderProps {
   post: {
@@ -10,11 +14,9 @@ interface BlogHeaderProps {
       name: string;
     }>;
     author: {
+      documentId: string;
       name: string;
       role?: string;
-      avatar: {
-        url: string;
-      };
     };
     publishedAt: string;
     readingTime?: string;
@@ -22,11 +24,30 @@ interface BlogHeaderProps {
 }
 
 export function BlogHeader({ post }: BlogHeaderProps) {
-  console.log('post',post)
-  // Build the avatar URL dynamically
-  const authorAvatarUrl = post.author?.avatar?.url
-    ? `${STRAPI_URL}${post.author.avatar.url}`
-    : "/default-avatar.jpg";
+  const [authorAvatarUrl, setAuthorAvatarUrl] = useState<string | null>(null);
+  const formattedDate = format(new Date(post.publishedAt), "dd MMM yyyy");
+
+  // Fetch author details to get the avatar
+  useEffect(() => {
+    async function fetchAuthorDetails() {
+      try {
+        const response = await fetch(
+          `${STRAPI_URL}/api/authors/${post.author.documentId}?populate=*`
+        );
+        const data = await response.json();
+        if (data?.data?.avatar?.formats?.thumbnail?.url) {
+          setAuthorAvatarUrl(`${STRAPI_URL}${data.data.avatar.formats.thumbnail.url}`);
+        } else {
+          setAuthorAvatarUrl("/default-avatar.jpg");
+        }
+      } catch (error) {
+        console.error("Error fetching author details:", error);
+        setAuthorAvatarUrl("/default-avatar.jpg");
+      }
+    }
+
+    fetchAuthorDetails();
+  }, [post.author.documentId]);
 
   return (
     <div className="relative py-10 lg:py-16">
@@ -53,11 +74,11 @@ export function BlogHeader({ post }: BlogHeaderProps) {
             </h1>
 
             <div className="flex flex-wrap items-center gap-4">
-              {/* Author info */}
+              {/* Author Info */}
               <div className="flex items-center gap-2">
                 <div className="relative size-10 rounded-full overflow-hidden">
                   <Image
-                    src={authorAvatarUrl}
+                    src={authorAvatarUrl || "/default-avatar.jpg"}
                     alt={post.author.name}
                     width={40}
                     height={40}
@@ -76,7 +97,7 @@ export function BlogHeader({ post }: BlogHeaderProps) {
               <div className="flex items-center gap-4 text-sm text-muted-foreground">
                 <span className="flex items-center gap-1">
                   <Calendar className="size-4" />
-                  {new Date(post.publishedAt).toLocaleDateString()}
+                  {formattedDate}
                 </span>
                 <span className="flex items-center gap-1">
                   <Clock className="size-4" />

@@ -2,27 +2,46 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "@/components/ui/modal";
 import { STRAPI_URL } from "@/lib/config/strapi";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 
 interface AuthorBioProps {
-  author: {
-    name: string;
-    role: string;
-    avatar: {
-      url: string;
-      alternativeText?: string;
-    };
-    bio: any[]; // Strapi block structure
-  };
+  authorId: string; // Pass the author ID as a prop
 }
 
-export function AuthorBio({ author }: AuthorBioProps) {
+export function AuthorBio({ authorId }: AuthorBioProps) {
+  const [author, setAuthor] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const authorAvatarUrl = author?.avatar?.url
-    ? `${STRAPI_URL}${author.avatar.url}`
+
+  // Fetch author details on mount
+  useEffect(() => {
+    async function fetchAuthor() {
+      try {
+        const response = await fetch(
+          `${STRAPI_URL}/api/authors/${authorId}?populate=*`
+        );
+        const data = await response.json();
+        console.log('data', data)
+
+        if (data?.data) {
+          setAuthor(data.data);
+        }
+      } catch (error) {
+        console.error("Error fetching author data:", error);
+      }
+    }
+
+    fetchAuthor();
+  }, [authorId]);
+
+  if (!author) {
+    return <p>Loading author details...</p>;
+  }
+
+  const authorAvatarUrl = author.avatar?.formats?.thumbnail?.url
+    ? `${STRAPI_URL}${author.avatar.formats.thumbnail.url}`
     : "/default-avatar.jpg";
 
   return (
@@ -44,10 +63,14 @@ export function AuthorBio({ author }: AuthorBioProps) {
           />
           <div>
             <h4 className="text-xl font-semibold text-foreground">{author.name}</h4>
-            <p className="text-sm text-muted-foreground mt-1">{author.role}</p>
+            <p className="text-sm text-muted-foreground mt-1">{author.role || "Author"}</p>
             <div className="text-muted-foreground mt-2">
               <div className="line-clamp-3 text-sm leading-relaxed">
-                <BlocksRenderer content={author.bio} />
+              {author.bio ? (
+              <BlocksRenderer content={author.bio} />
+            ) : (
+              <p className="text-sm text-muted-foreground">Bio not available.</p>
+            )}
               </div>
               <button
                 onClick={() => setIsModalOpen(true)}
@@ -73,10 +96,14 @@ export function AuthorBio({ author }: AuthorBioProps) {
               />
             </div>
             <h2 className="text-3xl font-bold mb-2">{author.name}</h2>
-            <p className="text-lg text-muted-foreground">{author.role}</p>
+            <p className="text-lg text-muted-foreground">{author.role || "Author"}</p>
           </div>
           <div className="prose prose-gray max-w-none">
-            <BlocksRenderer content={author.bio} />
+            {author.bio ? (
+              <BlocksRenderer content={author.bio} />
+            ) : (
+              <p className="text-sm text-muted-foreground">Bio not available.</p>
+            )}
           </div>
         </div>
       </Modal>

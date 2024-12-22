@@ -2,7 +2,6 @@ import type { BlogPost } from "@/lib/blog-data";
 import { BlogContent } from "./BlogContent";
 import { BlogSidebar } from "../../[slug]/components/BlogSidebar";
 import { BlogHeader } from "./BlogHeader";
-import { Modal } from "@/components/ui/modal";
 
 interface BlogPostProps {
   post: BlogPost;

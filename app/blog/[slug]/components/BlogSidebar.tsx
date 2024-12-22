@@ -1,4 +1,5 @@
 'use client';
+
 import { RecentPosts } from "./sidebar/RecentPosts";
 import { AuthorBio } from "./sidebar/AuthorBio";
 import { CategoryList } from "./sidebar/CategoryList";
@@ -17,17 +18,13 @@ interface BlogSidebarProps {
       role: string;
       avatar: string;
       bio: string;
+      documentId: string; // Author's document ID
     };
   };
 }
 
 export function BlogSidebar({ currentPost }: BlogSidebarProps) {
-  console.log('currentPost', currentPost);
-
-  // Ensure `currentPost.documentId` exists
   const currentPostId = currentPost?.documentId || "unknown-id";
-
-  // Extract category from the current post
   const categories = currentPost?.category
     ? [
         {
@@ -41,7 +38,7 @@ export function BlogSidebar({ currentPost }: BlogSidebarProps) {
   return (
     <div className="space-y-8 lg:mt-[-11.5rem]">
       <RecentPosts currentPostId={currentPostId} />
-      <AuthorBio author={currentPost.author} />
+      <AuthorBio authorId={currentPost.author.documentId} />
       <CategoryList categories={categories} />
     </div>
   );
